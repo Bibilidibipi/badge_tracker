@@ -18,6 +18,16 @@
   </head>
 
   <body>
+    <%= render 'shared/navbar' %>
+
+    <% flash[:messages]&.each do |message| %>
+      <%= message %><br>
+    <% end %>
+
+    <% flash[:errors]&.each do |error| %>
+      <%= error %><br>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resource :badges
+  resources :users, only: [ :new, :create ]
+  resource :session, only: [ :new, :create, :destroy ]
+
+  resources :badges, only: [ :index ]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -12,5 +15,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "badges#index"
+  root to: "static_pages#root"
 end
