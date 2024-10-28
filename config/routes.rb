@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :users, only: [ :new, :create ]
+  # Defines the root path route ("/")
+  root to: "users#show"
+
+  resources :users, only: [ :new, :create, :show ]
   resource :session, only: [ :new, :create, :destroy ]
 
   resources :badges, only: [ :index ]
@@ -13,7 +16,4 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
-  # Defines the root path route ("/")
-  root to: "static_pages#root"
 end

@@ -1,0 +1,7 @@
+<ul class="list-group">
+    <% @user.earned_badges.each do |badge| %>
+        <li class="list-group-item">
+            <%= badge.name %>
+        </li>
+    <% end %>
+</ul>
