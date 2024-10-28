@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_23_025806) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_27_174429) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "badge_users", force: :cascade do |t|
+    t.integer "badge_id", null: false
+    t.integer "user_id", null: false
+    t.boolean "earned"
+    t.boolean "eligible"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "badge_id"], name: "index_badge_users_on_user_id_and_badge_id", unique: true
+  end
 
   create_table "badges", force: :cascade do |t|
     t.string "name"
