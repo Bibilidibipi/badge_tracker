@@ -15,11 +15,11 @@ class User < ApplicationRecord
   end
 
   def earned_badges
-    badges.joins(:badge_users).where('badge_users.earned = true').distinct
+    badges.joins(:badge_users).where("badge_users.earned = true").distinct
   end
 
   def eligible_badges
-    badges.joins(:badge_users).where('badge_users.eligible = true').where('badge_users.earned = false').distinct
+    badges.joins(:badge_users).where("badge_users.eligible = true").where("badge_users.earned = false").distinct
   end
 
   private
