@@ -1,7 +1,13 @@
-<ul class="list-group">
+<ul class="list-group list-group-horizontal">
     <% @user.earned_badges.each do |badge| %>
-        <li class="list-group-item">
-            <%= badge.name %>
+        <li class="list-group-item border rounded d-flex ms-2 align-items-center" style="height: 120px" >
+            <div class="text-center">
+                <div class="" >
+                    <% badge_image = badge.image.persisted? ? badge.image : "badge.png" %>
+                    <%= image_tag badge_image, size:"64" %>
+                </div>
+                <%= badge.name %>
+            </div>
         </li>
     <% end %>
 </ul>
