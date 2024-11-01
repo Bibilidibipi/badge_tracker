@@ -1,0 +1,8 @@
+<a href="<%= url_for(badge) %>" class="list-group-item list-group-item-action border rounded ms-2 align-items-center" style="height: 120px" >    
+    <div class="text-center">
+        <div>
+            <%= image_tag badge.image, size:"64" %>
+        </div>
+        <%= badge.name %>
+    </div>
+</a>

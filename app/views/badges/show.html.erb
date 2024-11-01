@@ -1,0 +1,14 @@
+<div class="align-items-center mb-2">
+    <div class="ms-3 list-inline-item">
+        <%= image_tag @badge.image, size:"128" %>
+    </div>
+    <span class="ms-2 align-middle display-2"><%= @badge.name %></span>
+</div>
+<% if current_user.earned_badges.include?(@badge)
+    time_earned = @badge_user.created_at
+    tagline = "You earned this badge in " + time_earned.strftime("%B of %Y") + ". That's " + time_ago_in_words(time_earned) + " ago!"
+else
+    tagline = "You have not earned this badge... yet!"
+end %>
+<p class="ms-3 fw-lighter"><%= tagline %></p>
+<p class="text-start ms-3"><%= @badge.description %></p>

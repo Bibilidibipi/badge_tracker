@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Badge Tracker</a>
     <% if !!current_user %>
-      <div class="navbar-text me-auto"><%= current_user.name %></div>
+      <%= link_to current_user.name, url_for(current_user), class: "nav-link me-auto" %>
       <div class="navbar-nav">
         <%= button_to "Log Out", session_url, method: :delete, class: "nav-link" %>
       </div>

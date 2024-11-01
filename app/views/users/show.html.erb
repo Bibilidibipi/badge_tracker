@@ -1,13 +1,14 @@
-<ul class="list-group list-group-horizontal">
-    <% @user.earned_badges.each do |badge| %>
-        <li class="list-group-item border rounded d-flex ms-2 align-items-center" style="height: 120px" >
-            <div class="text-center">
-                <div class="" >
-                    <% badge_image = badge.image.persisted? ? badge.image : "badge.png" %>
-                    <%= image_tag badge_image, size:"64" %>
-                </div>
-                <%= badge.name %>
-            </div>
-        </li>
-    <% end %>
-</ul>
+<div class="container-fluid">
+    <h1 class="ms-2">Earned Badges</h1>
+    <ul class="list-group list-group-horizontal d-inline-flex">
+        <% @user.earned_badges.each do |badge| %>
+            <%= render "shared/badge_list_item", badge: badge %>
+        <% end %>
+    </ul>
+    <h2 class="ms-2 mt-3">Earn these next!</h2>
+    <ul class="list-group list-group-horizontal d-inline-flex">
+        <% @user.eligible_badges.each do |badge| %>
+            <%= render "shared/badge_list_item", badge: badge %>
+        <% end %>
+    </ul>
+</div>
