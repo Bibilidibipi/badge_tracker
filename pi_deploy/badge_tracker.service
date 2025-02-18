@@ -2,11 +2,12 @@
 Description=Badge Tracker Web App
 
 [Service]
-User=$(whoami)
-Group=$(whoami)
+Type=simple
+User=badge_tracker
+Group=badge_tracker
 WorkingDirectory=/var/www/badge_tracker
-Environment=PATH=/home/$(whoami)/.rbenv/shims:/home/$(whoami)/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
-ExecStart=/var/www/badge_tracker/bin/rails s -e production -p 3000
+Environment=PATH=/home/badge_tracker/.rbenv/shims:/home/badge_tracker/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
+ExecStart=/var/www/badge_tracker/bin/rails server -e production --port 3000
 Restart=on-failure
 
 [Install]

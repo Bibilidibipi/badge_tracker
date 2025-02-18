@@ -38,7 +38,7 @@ gem "bootsnap", require: false
 gem "sassc-rails"
 gem "bootstrap"
 
-gem 'ostruct', '~> 0.1.0'
+gem "ostruct", "~> 0.1.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
