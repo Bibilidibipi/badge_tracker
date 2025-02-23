@@ -13,7 +13,11 @@
                     Award/Unaward
                 </button>
                 <ul class="dropdown-menu">
-                    <% User.all.each do |user| %>
+                    <% users = @badge.badge_users.where(eligible: true).map(&:user).sort_by(&:name) %>
+                    <% if users.empty? %>
+                        <div class="dropdown-item fw-lighter">No eligible users</div>
+                    <% end %>
+                    <% users.each do |user| %>
                         <%= render "shared/badge_user_toggle", badge: @badge, user: user, attribute: :earned %>
                     <% end %>
                 </ul>
@@ -23,7 +27,7 @@
                     Change Eligibility
                 </button>
                 <ul class="dropdown-menu">
-                    <% User.all.each do |user| %>
+                    <% User.all.sort_by(&:name).each do |user| %>
                         <%= render "shared/badge_user_toggle", badge: @badge, user: user, attribute: :eligible %>
                     <% end %>
                 </ul>
@@ -31,8 +35,7 @@
         </div>
     <% end %>
     <% if current_user.earned_badges.include?(@badge)
-        time_earned = @badge_user.created_at
-        tagline = "You earned this badge in " + time_earned.strftime("%B of %Y") + ". That's " + time_ago_in_words(time_earned) + " ago!"
+        tagline = "You earned this badge in " + @badge_user.earned_at.strftime("%B of %Y") + ". That's " + time_ago_in_words(@badge_user.earned_at) + " ago!"
     else
         tagline = "You have not earned this badge... yet!"
     end %>
