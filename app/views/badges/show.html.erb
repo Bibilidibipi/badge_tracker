@@ -10,13 +10,21 @@
             <%= link_to "Edit Badge", edit_badge_path(@badge), class: "btn bg-primary text-white" %>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Award
+                    Award/Unaward
                 </button>
                 <ul class="dropdown-menu">
                     <% User.all.each do |user| %>
-                        <li>
-                            <%= button_to user.name, badge_users_path, method: :post, params: { badge_user: { badge_id: @badge.id, user_id: user.id, earned: true } }, class: "dropdown-item" %>
-                        </li>
+                        <%= render "shared/badge_user_toggle", badge: @badge, user: user, attribute: :earned %>
+                    <% end %>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Change Eligibility
+                </button>
+                <ul class="dropdown-menu">
+                    <% User.all.each do |user| %>
+                        <%= render "shared/badge_user_toggle", badge: @badge, user: user, attribute: :eligible %>
                     <% end %>
                 </ul>
             </div>

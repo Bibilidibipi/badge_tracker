@@ -4,6 +4,7 @@ class BadgeUser < ApplicationRecord
     validates :user, presence: true
     validates :badge, presence: true, uniqueness: { scope: :user }
     validates :earned, :eligible, inclusion: [ true, false ]
+    validates :earned, inclusion: { in: [ false ], message: "can't be true if eligible is false" }, unless: :eligible?
     after_initialize :set_defaults
 
     private

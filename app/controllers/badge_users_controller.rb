@@ -1,15 +1,24 @@
 class BadgeUsersController < ApplicationController
     def create
-        @badge_user = BadgeUser.new(badge_user_params)
+        @badge_user = BadgeUser.new
         authorize! :create, @badge_user
 
-        @badge = Badge.find(params[:badge_user][:badge_id])
-
-        if !@badge_user.save
+        if !@badge_user.update(badge_user_params)
             flash[:errors] = @badge_user.errors.full_messages
         end
 
-        redirect_to url_for(@badge)
+        redirect_to url_for(@badge_user.badge)
+    end
+
+    def update
+        @badge_user = BadgeUser.find(params[:id])
+        authorize! :update, @badge_user
+
+        if !@badge_user.update(badge_user_params)
+            flash[:errors] = @badge_user.errors.full_messages
+        end
+
+        redirect_to url_for(@badge_user.badge)
     end
 
     private

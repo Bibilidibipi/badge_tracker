@@ -1,0 +1,10 @@
+<%# arguments: badge, user, attribute %>
+
+<% badge_user = badge.badge_users.where(user: user).first %>
+<% path = badge_user ? badge_user_path(badge_user) : badge_users_path %>
+<% method = badge_user ? :put : :post %>
+<% attribute_value = !badge_user.try(attribute)%>
+<% name_display = user.name + (badge_user.try(attribute) ? " (#{attribute})" : "") %>
+<li>
+    <%= button_to name_display, path, method: method, params: { badge_user: { badge_id: badge.id, user_id: user.id, attribute => attribute_value } }, class: "dropdown-item" %>
+</li>
