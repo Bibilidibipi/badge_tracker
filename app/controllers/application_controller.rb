@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   before_action :require_logged_in!
 
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:errors] = [exception.message]
+    redirect_to root_url
+  end
+
   private
 
   def current_user

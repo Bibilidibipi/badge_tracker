@@ -1,4 +1,10 @@
-<h1>All Badges</h1>
-<% @badges.each do |badge| %>
-    <div><%= badge.name %></div>
-<% end %>
+<div class="container-fluid ms-2">
+    <h1>All Badges</h1>
+    <div class="row row-cols-auto list-group list-group-horizontal d-inline-flex">
+        <% @badges.each do |badge| %>
+            <div class="col">
+                <%= render "shared/badge_list_item", badge: badge %>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :users, only: [ :new, :create, :show ]
   resource :session, only: [ :new, :create, :destroy ]
 
-  resources :badges, only: [ :index, :show ]
+  resources :badges, only: [ :index, :show, :new, :create, :edit, :update ]
+  resources :badge_users, only: [ :new, :create, :update, :destroy ]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

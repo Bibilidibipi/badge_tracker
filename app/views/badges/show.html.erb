@@ -1,14 +1,33 @@
-<div class="align-items-center mb-2">
-    <div class="ms-3 list-inline-item">
-        <%= image_tag @badge.image, size:"128" %>
+<div class="ms-3">
+    <div class="align-items-center mb-2">
+        <div class="list-inline-item">
+            <%= image_tag @badge.image, size:"128" %>
+        </div>
+        <span class="align-middle display-2"><%= @badge.name %></span>
     </div>
-    <span class="ms-2 align-middle display-2"><%= @badge.name %></span>
+    <% if current_user.admin? %>
+        <div class="mb-3 mt-3">
+            <%= link_to "Edit Badge", edit_badge_path(@badge), class: "btn bg-primary text-white" %>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Award
+                </button>
+                <ul class="dropdown-menu">
+                    <% User.all.each do |user| %>
+                        <li>
+                            <%= button_to user.name, badge_users_path, method: :post, params: { badge_user: { badge_id: @badge.id, user_id: user.id, earned: true } }, class: "dropdown-item" %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+    <% if current_user.earned_badges.include?(@badge)
+        time_earned = @badge_user.created_at
+        tagline = "You earned this badge in " + time_earned.strftime("%B of %Y") + ". That's " + time_ago_in_words(time_earned) + " ago!"
+    else
+        tagline = "You have not earned this badge... yet!"
+    end %>
+    <p class="fw-lighter"><%= tagline %></p>
+    <p class="text-start"><%= @badge.description %></p>
 </div>
-<% if current_user.earned_badges.include?(@badge)
-    time_earned = @badge_user.created_at
-    tagline = "You earned this badge in " + time_earned.strftime("%B of %Y") + ". That's " + time_ago_in_words(time_earned) + " ago!"
-else
-    tagline = "You have not earned this badge... yet!"
-end %>
-<p class="ms-3 fw-lighter"><%= tagline %></p>
-<p class="text-start ms-3"><%= @badge.description %></p>

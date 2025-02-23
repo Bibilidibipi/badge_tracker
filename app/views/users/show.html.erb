@@ -1,14 +1,22 @@
-<div class="container-fluid">
-    <h1 class="ms-2">Earned Badges</h1>
+<div class="container-fluid ms-2">
+    <h1>Earned Badges</h1>
     <ul class="list-group list-group-horizontal d-inline-flex">
-        <% @user.earned_badges.each do |badge| %>
-            <%= render "shared/badge_list_item", badge: badge %>
+        <% if @user.earned_badges.empty? %>
+            <p class="fw-lighter"> You haven't earned any badges... yet! </p>
+        <% else %>
+            <% @user.earned_badges.each do |badge| %>
+                <%= render "shared/badge_list_item", badge: badge %>
+            <% end %>
         <% end %>
     </ul>
-    <h2 class="ms-2 mt-3">Earn these next!</h2>
+    <h1>Earn these next</h1>
     <ul class="list-group list-group-horizontal d-inline-flex">
-        <% @user.eligible_badges.each do |badge| %>
-            <%= render "shared/badge_list_item", badge: badge %>
+        <% if @user.eligible_badges.empty? %>
+                <p class="fw-lighter"> You have no badges to work on! Your challenge: make up your own badge. </p>
+        <% else %>
+            <% @user.eligible_badges.each do |badge| %>
+                <%= render "shared/badge_list_item", badge: badge %>
+            <% end %>
         <% end %>
     </ul>
 </div>
