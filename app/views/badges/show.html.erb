@@ -8,6 +8,7 @@
     <% if current_user.admin? %>
         <div class="mb-3 mt-3">
             <%= link_to "Edit Badge", edit_badge_path(@badge), class: "btn bg-primary text-white" %>
+            <%= button_to "Delete Badge", @badge, method: :delete, data: { turbo_confirm: 'Delete badge?' }, class: "btn bg-primary text-white" %>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Award/Unaward

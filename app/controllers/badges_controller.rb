@@ -42,6 +42,19 @@ class BadgesController < ApplicationController
         end
     end
 
+    def destroy
+        @badge  = Badge.find(params[:id])
+        authorize! :destroy, @badge
+
+        if @badge.destroy
+            redirect_to badges_url
+        else
+            flash.now[:errors] = @badge.errors.full_messages
+            @badge_user = BadgeUser.find_by(badge: @badge, user: current_user)
+            render :show
+        end
+    end
+
     private
 
     def badge_params
