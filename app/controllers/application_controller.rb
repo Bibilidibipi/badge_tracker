@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :require_logged_in!
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:errors] = [exception.message]
+    flash[:errors] = [ exception.message ]
     redirect_to root_url
   end
 

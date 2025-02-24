@@ -17,8 +17,8 @@ class BadgeUser < ApplicationRecord
     end
 
     def set_earned_at
-        if (will_save_change_to_earned? && earned?)
-            self.earned_at = Time.now #updated_at_change_to_be_saved[1] doesn't work; could put it in an after_save callback
+        if will_save_change_to_earned? && earned?
+            self.earned_at = Time.now # updated_at_change_to_be_saved[1] doesn't work; could put it in an after_save callback
         end
     end
 end

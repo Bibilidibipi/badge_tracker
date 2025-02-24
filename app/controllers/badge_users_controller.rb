@@ -22,7 +22,7 @@ class BadgeUsersController < ApplicationController
     end
 
     private
-    
+
     def badge_user_params
         params.require(:badge_user).permit(:badge_id, :user_id, :eligible, :earned)
     end
